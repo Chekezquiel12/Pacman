@@ -1,0 +1,175 @@
+@startuml
+class Pacman{
+ +ComerPunto()
+ +Mover()
+ +ComerCereza()
+ -color
+ -posición 
+ -velocidad
+ -vida
+}
+class Fantasma{
+ -color
+ -posición
+ -velocidad
+ -estado
+ +Mover()
+ +CambiarEstado()
+}
+class Enemigo{
+ +Comer()
+ +Mover()
+}
+class Color{
+ +Cambiar()
+}
+class Amarillo{
+ +DarColor()
+}
+class Punto{
+ +DarPuntaje()
+}
+class Puntaje{
+ +AcumularPunto()
+
+}
+class Cereza{
+ +DarPoder()
+ -color
+ -posicion
+ +DarPunto()
+}
+class Poder{
+ +ComerFantasma()
+ -tiempo
+}
+class Tiempo{
+ -segundo
+ +Acumular()
+}
+class Juego{
+ -jugadores
+ +SerJugado()
+}
+class Pacmangame{
+ +Jugar()
+ -pacman
+ -fantasma
+ -punto
+ +DarEntretenimiento()
+}
+class Menu{
+ -opciones
+ -letras
+ +MoverFantasma()
+}
+class Jugador{
+ +MoverPacman()
+ -cuerpo
+ -ojos
+ +Jugar()
+}
+class Camino{
+ +Guiar()
+ -vueltas
+ -cruces
+ -color
+}
+class Segundo{
+ +Acumular()
+ +Cambiar()
+ 
+}
+class Musica{
+ +Sonar()
+ -ritmo
+}
+class Fondo{
+ -color
+ +Cambiar()
+}
+class Mapa{
+ -laberinto
+ +JugarMapa()
+}
+class Vida{
+ -limite
+ +DarOportunidad()
+ 
+}
+class Interfaz{
+ -color
+ +MostrarVida()
+ +MostrarTiempo()
+ +MostrarPuntaje()
+ +MostrarJuego()
+}
+class Nivel{
+ +Cambiar()
+ -dificultad
+}
+class Colision{
+ +DetectarColision()
+ -posicion
+ 
+}
+class Animacion{
+ -fotograma
+ -velocidadAnimacion
+ +ReproducirAnimacion()
+ +DetenerAnimacion()
+ +ActualizarFotograma()
+
+}
+class Boca{
+ +Comer()
+ +Abrir()
+ +Cerrar()
+ -animacion
+ -longitud
+ -forma
+}
+class Ojo{
+ +Ver()
+ -forma
+}
+
+Pacman "1" o-- "4" Fantasma
+Fantasma --|> "1" Enemigo
+Fantasma "1" *-- "4" Color
+Pacman --|> "1" Jugador
+Pacman "1" *-- "1" Color
+Cereza "1" *-- "1" Color
+Cereza "1" *-- "1" Poder
+Amarillo --|> "1" Color
+Pacman "1" o-- "*" Camino
+Pacman "1" o-- "4" Cereza
+Fantasma "1" o-- "*" Camino
+Pacman "1" o-- "*" Punto
+Fantasma --|> "1" Punto
+Punto --|> "1" Puntaje
+Juego "1" *-- "*"Puntaje
+Juego "1" *-- "*" Tiempo
+Tiempo "1" *-- "*" Segundo
+Pacmangame --|> "1" Juego
+Pacmangame "1" *-- "1" Menu
+Juego "1" *-- "1" Musica
+Musica "1" *-- "*" Segundo
+Jugador "1" *-- "3" Vida
+Poder "1" *-- "*" Tiempo
+Mapa "1" *-- "1" Interfaz
+Juego "1" *-- "1" Mapa
+Mapa "1" *-- "1" Fondo
+Pacmangame "1" *-- "*" Colision
+Pacmangame "1" *-- "*" Animacion
+Pacman "1" *-- "1" Boca
+Pacman "1" o-- "1" Boca
+Pacman "1" *-- "2" Ojo
+Fantasma "1" *-- "2" Ojo
+Pacmangame "1" *-- "*" Nivel
+Colision "1" *-- "*" Tiempo
+Animacion "1" *-- "*" Tiempo
+Jugador "1" o-- "1" Pacmangame
+Fondo "1" *-- "*" Color
+Mapa "1" *-- "*" Color
+@enduml
