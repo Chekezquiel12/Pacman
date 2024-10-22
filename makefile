@@ -3,3 +3,6 @@ build : src/main.cpp
 
 	run : bin/tazo
 		./bin/tazo
+	bin/tazo : src/main.cpp
+		./bin/tazo > assets/mensaje
+		
