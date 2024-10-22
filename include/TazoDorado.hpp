@@ -12,4 +12,9 @@ public:
         this-> flotando = true;
 
     }
+
+    bool Flotando(){
+        return this ->flotando;
+
+    }
 };

@@ -1,8 +1,14 @@
-build : src/main.cpp
+run : bin/tazo
+	./bin/tazo
+
+runMem : bin/mem
+	   ./bin/mem
+
+bin/tazo : src/main.cpp
 	g++ src/main.cpp -Iinclude -o bin/tazo
 
-	run : bin/tazo
-		./bin/tazo
-	bin/tazo : src/main.cpp
-		./bin/tazo > assets/mensaje
-		
+bin/mem : src/memoria.cpp
+	g++ src/memoria.cpp -Iinclude -o bin/mem
+	
+assets/mensaje : bin/tazo
+	./bin/tazo > assets/mensaje
