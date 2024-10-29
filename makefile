@@ -1,19 +1,18 @@
-output = bin
-source = src
-include = -Iinclude
-dependencias = -lftxui-screen -lftxui-dom -lftxui-component
-flags = -std=c++2a $(dependencias) $(include)
+run : bin/tazo	
+	./bin/tazo
 
+runMem: bin/mem
+	./bin/mem
 
-run : $(output)/tron 
-	./$<
+runAnimacion: bin/animacion
+	./bin/animacion
+bin/tazo : src/main.cpp
+	g++ src/main.cpp -Iinclude -o bin/tazo
 
-$(output)/tron : $(source)/main.cpp 
-	g++ -o $@ $< $(flags)
-	
+bin/mem : src/memoria.cpp
+	g++ src/memoria.cpp -Iinclude -o bin/mem
 
-runPantalla : $(output)/pantalla 
-	./$<
-
-$(output)/pantalla : $(source)/pantalla.cpp
-	g++ -o $@ $< $(flags)
+bin/animacion : src/canvas_animated.cpp
+	g++ src/canvas_animated.cpp -Iinclude -o bin/animacion -std=c++17 -lftxui-screen -lftxui-dom -lftxui-component
+assets/mensaje :  bin/tazo
+	./bin/tazo > assets/mensaje
