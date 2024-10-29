@@ -1,20 +1,19 @@
 class TazoDorado
 {
 private:
-    bool flotando;
+   bool flotando;
 public:
     TazoDorado() {
-        this-> flotando = false;
-
+        this->flotando = false;
     }
     ~TazoDorado() {}
-    void Flotar(){
-        this-> flotando = true;
-
+    void Flotar() {
+            this->flotando = true;
     }
-
-    bool Flotando(){
-        return this ->flotando;
-
+    bool IsFloating(){
+        return this->flotando;
+    }
+    void Inicializar() {
+        this->flotando = false;
     }
 };

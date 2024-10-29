@@ -1,14 +1,19 @@
-run : bin/tazo
-	./bin/tazo
+output = bin
+source = src
+include = -Iinclude
+dependencias = -lftxui-screen -lftxui-dom -lftxui-component
+flags = -std=c++2a $(dependencias) $(include)
 
-runMem : bin/mem
-	   ./bin/mem
 
-bin/tazo : src/main.cpp
-	g++ src/main.cpp -Iinclude -o bin/tazo
+run : $(output)/tron 
+	./$<
 
-bin/mem : src/memoria.cpp
-	g++ src/memoria.cpp -Iinclude -o bin/mem
+$(output)/tron : $(source)/main.cpp 
+	g++ -o $@ $< $(flags)
 	
-assets/mensaje : bin/tazo
-	./bin/tazo > assets/mensaje
+
+runPantalla : $(output)/pantalla 
+	./$<
+
+$(output)/pantalla : $(source)/pantalla.cpp
+	g++ -o $@ $< $(flags)

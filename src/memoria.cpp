@@ -13,6 +13,15 @@ int main(int argc, char const *argv[])
     cout<<"Tamaño Entero:"<< sizeof(letra)<< endl;
     cout<<"Tamaño Entero:"<< sizeof(decimal)<< endl;
 
+    TazoDorado* direccion;
+    direccion = (TazoDorado *)malloc(sizeof(TazoDorado));
+    direccion->Inicializar();
+    std::cout<<"Valor en direccion:  "<< direccion->IsFloating()<<std::endl;
+    
+    TazoDorado *direccion2;
+    direccion2 = new TazoDorado();
+     std::cout<<"Valor en direccion:  "<< direccion2->IsFloating()<<std::endl;
+
     /* code */
     return 0;
 }
