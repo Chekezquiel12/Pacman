@@ -1,6 +1,3 @@
-run : bin/tazo	
-	./bin/tazo
-
 runMem: bin/mem
 	./bin/mem
 
