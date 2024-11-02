@@ -1,42 +1,55 @@
 #include <ftxui/dom/elements.hpp>
 #include <ftxui/screen/screen.hpp>
 #include <ftxui/screen/color.hpp>
-#include <ftxui/screen/terminal.hpp>
 #include <iostream>
 #include <thread>
 
 using namespace std;
 using namespace ftxui;
 
-int main(int argc, char const *argv[])
-{
-    std::string reset_position;
-    int frame = 0;
-    auto can = Canvas(50,50);
-    can.DrawPointCircle(10,10,10);
-    auto ColorSupport = vbox({
-                            Terminal::ColorSupport() >= Terminal::Color::Palette16
-                                ? text(" 16 color palette support : Yes")
-                                : text(" 16 color palette support : No"),
-                            Terminal::ColorSupport() >= Terminal::Color::Palette256
-                                ? text("256 color palette support : Yes")
-                                : text("256 color palette support : No"),
-                            Terminal::ColorSupport() >= Terminal::Color::TrueColor
-                                ? text("       True color support : Yes")
-                                : text("       True color support : No"),
-                        });
-    while (true)
-    {
-        Screen pantalla = Screen::Create(Dimension::Full(), Dimension::Full());
-        Element personaje = spinner(21, frame);
-        Element lienzo = bgcolor(Color::Blue, border(vbox(ColorSupport,personaje,canvas(&can))));
-        Render(pantalla, lienzo);
-        std::cout << reset_position;
-        pantalla.Print();
-        reset_position = pantalla.ResetPosition(true);
-        this_thread::sleep_for(0.1s);
-        frame++;
-    }
+int main() {
+    // Crear el lienzo de 50x50
+    auto can = Canvas(50, 50);
+
+    // Crear la pantalla
+    Screen pantalla = Screen::Create(Dimension::Full(), Dimension::Full());
+
+    // Dibujar cada parte del oso con un retraso para animación
+    // Dibujar la cabeza del oso
+    can.DrawPointCircle(25, 25, 10, Color::Green); // Cabeza
+    Render(pantalla, canvas(&can));
+    pantalla.Print();
+    this_thread::sleep_for(chrono::milliseconds(500));
+
+    // Dibujar la oreja izquierda
+    can.DrawPointCircle(15, 15, 5, Color::Green); // Oreja izquierda
+    Render(pantalla, canvas(&can));
+    pantalla.Print();
+    this_thread::sleep_for(chrono::milliseconds(500));
+
+    // Dibujar la oreja derecha
+    can.DrawPointCircle(35, 15, 5, Color::Green); // Oreja derecha
+    Render(pantalla, canvas(&can));
+    pantalla.Print();
+    this_thread::sleep_for(chrono::milliseconds(500));
+
+    // Dibujar el ojo izquierdo
+    can.DrawPoint(22, 20, Color::Black); // Ojo izquierdo
+    Render(pantalla, canvas(&can));
+    pantalla.Print();
+    this_thread::sleep_for(chrono::milliseconds(500));
+
+    // Dibujar el ojo derecho
+    can.DrawPoint(28, 20, Color::Black); // Ojo derecho
+    Render(pantalla, canvas(&can));
+    pantalla.Print();
+    this_thread::sleep_for(chrono::milliseconds(500));
+
+    // Dibujar la nariz
+    can.DrawPointCircle(25, 28, 2, Color::Black); // Nariz
+    Render(pantalla, canvas(&can));
+    pantalla.Print();
+    this_thread::sleep_for(chrono::milliseconds(500));
 
     return 0;
 }
