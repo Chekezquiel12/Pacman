@@ -3,6 +3,13 @@ runMem: bin/mem
 
 runAnimacion: bin/animacion
 	./bin/animacion
+
+runExamen : bin/examen
+	./bin/examen
+
+bin/examen : src/examen.cpp
+	g++ src/examen.cpp -Iinclude -o bin/examen -std=c++17 -lftxui-screen -lftxui-dom -lftxui-component
+
 bin/tazo : src/main.cpp
 	g++ src/main.cpp -Iinclude -o bin/tazo
 
